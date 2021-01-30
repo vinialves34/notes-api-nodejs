@@ -9,12 +9,13 @@ module.exports = () => {
     app.set('port', process.env.PORT || config.get('server.port'));
 
     app.use(bodyParser.json());
+    app.use(bodyParser.urlencoded({ extended: true }));
 
     // ENDPOINTS
     consign({cwd: 'api'})
+        .then('Models')
         .then('Controllers')
         .then('Routes')
-        .then('Models')
         .into(app);
 
     return app;

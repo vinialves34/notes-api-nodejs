@@ -1,12 +1,14 @@
-module.exports = () => {
+module.exports = app => {
     const controller = {};
+    const Notes = app.Models.Notes
 
     controller.listNotes = (req, res) => {
-        try {
-            return res.send("Teste");
-        } catch (error) {
-            return res.send(error);
-        }
+        Notes.findAll()
+            .then((response) => { 
+                res.status(200).send(response);
+            }).catch((err) => {
+                res.status(500).send({"Status": "500", "Message": "Ocorreu um problema!"});
+            });
     }
 
     controller.createNotes = () => {
@@ -18,7 +20,7 @@ module.exports = () => {
     }
 
     controller.deleteNotes = () => {
-        
+
     }
 
     return controller;

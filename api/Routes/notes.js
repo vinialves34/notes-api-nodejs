@@ -1,5 +1,5 @@
 module.exports = app => {
-    const controller = require('../Controllers/NotesController')();
+    const controller = app.Controllers.NotesController;
 
     app.route('/api/notes').get(controller.listNotes);
     app.route('/api/notes/create').post(controller.createNotes);
