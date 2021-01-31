@@ -13,6 +13,7 @@ module.exports = () => {
 
     // ENDPOINTS
     consign({cwd: 'api'})
+        .then('Helpers')
         .then('Models')
         .then('Controllers')
         .then('Routes')
