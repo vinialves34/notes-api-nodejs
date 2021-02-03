@@ -4,7 +4,6 @@ module.exports = app => {
     const responseApi = app.Helpers.ResponseApi;
 
     controller.listNotes = (req, res) => {
-        console.log("Caiu no Controller");
         Notes.findAll()
             .then((response) => { 
                 res.status(200).send(
