@@ -1,18 +1,18 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const config = require('config');
 const consign = require('consign');
+const dotenv = require('dotenv');
 
 module.exports = () => {
     const app = express();
-
-    app.set('port', process.env.PORT || config.get('server.port'));
-
+    dotenv.config();
+    app.set('port', process.env.HOST_PORT);
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({ extended: true }));
 
     // ENDPOINTS
     consign({cwd: 'api'})
+        .then('Security')
         .then('Helpers')
         .then('Models')
         .then('Controllers')

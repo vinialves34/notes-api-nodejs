@@ -14,8 +14,8 @@ module.exports = app => {
     model.save = async (req, res) => {
         try {
             await db.query('BEGIN');
-            const queryText = "INSERT INTO public.notas(titulo, descricao, categoria_id) VALUES($1, $2, $3) RETURNING *";
-            const responseQuery = await db.query(queryText, [req.title, req.description, req.category_id]);
+            const queryText = "INSERT INTO public.notas(titulo, descricao, categoria_id, usuario_id) VALUES($1, $2, $3, $4) RETURNING *";
+            const responseQuery = await db.query(queryText, [req.title, req.description, req.category_id, req.user_id]);
             await db.query('COMMIT');
 
             return responseQuery.rows[0];
