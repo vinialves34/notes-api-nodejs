@@ -17,6 +17,8 @@ module.exports = app => {
 
     controller.createNotes = (req, res) => {
         let dataNotes = req.body;
+        req.body.user_id = req.userId;
+
         Notes.save(dataNotes)
             .then((response) => {
                 res.status(200).send(
@@ -44,7 +46,18 @@ module.exports = app => {
     }
 
     controller.deleteNotes = (req, res) => {
+        let dataNotes = req.body;
+        req.body.id = req.params.id;
 
+        Notes.delete(dataNotes)
+            .then((response) => {
+                res.status(200).send(
+                    responseApi.success("Anotação excluida com sucesso!", response)
+                );
+            }).catch((err) => {
+                res.status(500).send(responseApi.error());
+                console.error(err);
+            });
     }
 
     return controller;

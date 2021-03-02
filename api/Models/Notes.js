@@ -35,7 +35,21 @@ module.exports = app => {
             return responseQuery.rows[0];
         } catch (error) {
             await db.query('ROLLBACK');
-            throw error
+            throw error;
+        }
+    }
+
+    model.delete = async (req, res) => {
+        try {
+            await db.query('BEGIN');
+            const queryText = "DELETE FROM public.notas WHERE id = $1 RETURNING *";
+            const responseQuery = await db.query(queryText, [req.id]);
+            await db.query('COMMIT');
+
+            return responseQuery.rows[0];
+        } catch (error) {
+            await db.query('ROLLBACK');
+            throw error;
         }
     }
 

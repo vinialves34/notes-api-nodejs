@@ -50,7 +50,8 @@ module.exports = app => {
                     let passwordisValid = bcrypt.compareSync(req.body.password, response[0].senha);
                     if (!passwordisValid) res.status(401).send({ auth: false, token: null });
 
-                    let token = jwt.sign({ id: response.id }, process.env.ACCESS_TOKEN_SECRET);
+                    let token = jwt.sign({ id: response[0].id }, process.env.ACCESS_TOKEN_SECRET);
+
                     res.status(200).send(
                         responseApi.success("Login efetuado com sucesso!", {auth: true, token: token})
                     );
