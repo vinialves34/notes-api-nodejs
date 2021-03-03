@@ -14,11 +14,11 @@ module.exports = app => {
         let token = req.headers.authorization.split('Bearer ')[1];
 
         if (!token) {
-            res.status(403).send({ auth: false, message: 'O token não foi fornecido!'});
+            res.status(403).json({ auth: false, message: 'O token não foi fornecido!'});
         } else {
             jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decoded) => {
                 if (err) {
-                    res.status(500).send({ auth: false, message: 'Token fornecido é inválido!' })
+                    res.status(500).json({ auth: false, message: 'Token fornecido é inválido!' })
                 }
 
                 req.userId = decoded.id;

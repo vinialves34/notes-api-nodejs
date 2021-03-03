@@ -6,11 +6,11 @@ module.exports = app => {
     controller.listNotes = (req, res) => {
         Notes.findAll()
             .then((response) => { 
-                res.status(200).send(
-                    responseApi.success("Anotações listadas com sucesso!", response)
+                res.status(200).json(
+                    responseApi.success("Suas anotações foram listadas com sucesso!", response)
                 );
             }).catch((err) => {
-                res.status(500).send(responseApi.error());
+                res.status(500).json(responseApi.error());
                 console.error(err);
             });
     }
@@ -21,11 +21,11 @@ module.exports = app => {
 
         Notes.save(dataNotes)
             .then((response) => {
-                res.status(200).send(
+                res.status(200).json(
                     responseApi.success("Anotação salva com sucesso!", response)
                 );
             }).catch((err) => {
-                res.status(500).send(responseApi.error());
+                res.status(500).json(responseApi.error());
                 console.error(err);
             });
     }
@@ -36,11 +36,11 @@ module.exports = app => {
 
         Notes.update(dataNotes)
             .then((response) => {
-                res.status(200).send(
+                res.status(200).json(
                     responseApi.success("Anotação atualizada com sucesso!", response)
                 );
             }).catch((err) => {
-                res.status(500).send(responseApi.error());
+                res.status(500).json(responseApi.error());
                 console.error(err);
             });
     }
@@ -51,11 +51,11 @@ module.exports = app => {
 
         Notes.delete(dataNotes)
             .then((response) => {
-                res.status(200).send(
+                res.status(200).json(
                     responseApi.success("Anotação excluida com sucesso!", response)
                 );
             }).catch((err) => {
-                res.status(500).send(responseApi.error());
+                res.status(500).json(responseApi.error());
                 console.error(err);
             });
     }
